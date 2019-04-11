@@ -81,7 +81,7 @@ def test(TestSet,input_weights,output_weights):
     for DataPoint in TestSet:
         for classlabel in range(N_classes):
             sum_error += (int((DataPoint.label-1)==classlabel)-discriminant(classlabel,DataPoint,input_weights,output_weights))**2
-    return sum_error/2
+    return sum_error/(2*len(TestSet))
 #-----------------------------------------------
 
 fileobj = open("Colon_Cancer_CNN_Features.csv","r")
