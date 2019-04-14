@@ -9,7 +9,7 @@ class DataPoint:
         return str(self.attributes) + " : " +str(self.label)
 
 def log_output(string):
-    f = open("logfile_SSD.txt","a")
+    f = open("logfile_CEL.txt","a")
     f.write("\n"+str(datetime.datetime.now()) +" : "+ string+"\n")
 
 def sigmoid(x):
@@ -96,7 +96,7 @@ random.shuffle(DataSet)
 TrainSet = DataSet[:5000]
 TestSet = DataSet[5000:]
 
-for i in range(5,15):
+for i in range(5,16):
     string = str(i) + " Neurons"
     log_output(string)
     print(string)

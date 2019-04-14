@@ -96,7 +96,7 @@ random.shuffle(DataSet)
 TrainSet = DataSet[:5000]
 TestSet = DataSet[5000:]
 
-for i in range(5,15):
+for i in range(5,16):
     string = str(i) + " Neurons"
     log_output(string)
     print(string)
