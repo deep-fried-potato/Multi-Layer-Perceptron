@@ -1,11 +1,16 @@
 import math
 import random
+import datetime
 class DataPoint:
     def __init__(self,attributes):
         self.attributes = [1] + attributes[:-1]
         self.label = attributes[-1]
     def __str__(self):
         return str(self.attributes) + " : " +str(self.label)
+
+def log_output(string):
+    f = open("logfile_SSD.txt","a")
+    f.write("\n"+str(datetime.datetime.now()) +" : "+ string+"\n")
 
 def sigmoid(x):
   return 1 / (1 + math.exp(-x))
@@ -71,7 +76,9 @@ def train(TrainSet,input_weights,output_weights):
         prev_out_weights = output_weights
         output_weights = [ addlists(output_weights[classlabel],scalarprod(eta,change_output_weight(classlabel,TrainSet,input_weights,output_weights,delta_k_global))) for classlabel in range(N_classes)]
         input_weights = [addlists(input_weights[neuron],scalarprod(eta,change_input_weight(neuron,TrainSet,input_weights,prev_out_weights,delta_k_global))) for neuron in range(N_neurons)]
-        print("Iteration:",epoch," Error:", test(TrainSet,input_weights,output_weights))
+        string = "Iteration:" + str(epoch) + " Error:"+ str(test(TrainSet,input_weights,output_weights))
+        log_output(string)
+        print(string)
         epoch+=1
     return [input_weights,output_weights]
 def test(TestSet,input_weights,output_weights):
@@ -90,11 +97,15 @@ TrainSet = DataSet[:5000]
 TestSet = DataSet[5000:]
 
 for i in range(5,15):
-    print(i,"Neurons")
+    string = str(i) + " Neurons"
+    log_output(string)
+    print(string)
     N_neurons = i
     N_classes = 4
     input_weights = [[1]*len(DataSet[0].attributes)]*N_neurons
     output_weights = [[1]*N_neurons]*N_classes
     [trained_input_weights,trained_output_weights]=train(DataSet,input_weights,output_weights)
     test_error = test(TestSet,trained_input_weights,trained_output_weights)
-    print("Test error:" , test_error)
+    string = "Test error: " + str(test_error)
+    log_output(string)
+    print(string)
