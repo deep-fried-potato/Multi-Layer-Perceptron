@@ -34,7 +34,7 @@ def discriminant(classlabel,DataPoint,input_weights,output_weights):
 def del_k(classlabel,DataPoint,input_weights,output_weights,pointcount,delta_k_global):
     hidden_layer_output = [activation_sigmoid(input_weights[neuron],DataPoint.attributes) for neuron in range(N_neurons)]
     netk = dotprod(output_weights[classlabel],hidden_layer_output)
-    del_k = (int((DataPoint.label-1)==classlabel)-discriminant(classlabel,DataPoint,input_weights,output_weights))*differentiated_sigmoid(netk)
+    del_k = (int((DataPoint.label-1)==classlabel)/discriminant(classlabel,DataPoint,input_weights,output_weights))*differentiated_sigmoid(netk)
     delta_k_global[pointcount][classlabel]=del_k
     return del_k
 
